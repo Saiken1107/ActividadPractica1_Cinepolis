@@ -1,0 +1,64 @@
+﻿@model Practica1_CINECO.Models.BoletoModel
+@{
+    ViewData["Title"] = "Compra de Boletos";
+}
+
+<div class="container">
+    <div class="header">
+        <h1>Cinépolis</h1>
+    </div>
+
+    <form asp-action="Index" method="post">
+        <div class="row justify-content-around">
+            <!-- Sección de Entradas (Formulario de Ingreso de Datos) -->
+            <div class="col-md-4 form-section">
+                <h2>Entradas:</h2>
+                <div class="form-group">
+                    <label><strong>Nombre del comprador:</strong></label>
+                    <small class="form-text text-muted">(Si es más de uno, separar con coma)</small>
+                    <input type="text" asp-for="Comprador" placeholder="Ingrese el nombre aquí" />
+                </div>
+
+                <div class="form-group">
+                    <label><strong>Cantidad de compradores:</strong></label>
+                    <input type="number" asp-for="CantidadCompradores" />
+                </div>
+
+                <div class="form-group">
+                    <label><strong>¿Tiene Tarjeta CINECO?</strong></label>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="TieneTarjetaCineco" value="true" />
+                        <label class="form-check-label">Sí</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" asp-for="TieneTarjetaCineco" value="false" />
+                        <label class="form-check-label">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label><strong>Cantidad de Boletos:</strong></label>
+                    <input type="number" asp-for="CantidadBoletos" />
+                </div>
+            </div>
+
+            <!-- Sección de Resumen de la Compra (Ticket) -->
+            <div class="col-md-4 summary-section">
+                <h2>Compra:</h2>
+                <p><strong>Total a Pagar: </strong> @Model.TotalPagar.ToString("C")</p>
+                <p><strong>Cantidad de personas: </strong>@Model.CantidadCompradores</p>
+                <p><strong>La cantidad máxima de boletos comprados fue de: </strong>@Model.CantidadBoletos</p>
+            </div>
+        </div>
+
+        <!-- Sección de Acciones (Botones) -->
+        <div class="justify-content-center">
+            <div class="col-md-3 actions-section text-center botones">
+                <h2>Acciones:</h2>
+                <button type="submit" class="btn btn-success mr-2">Procesar</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" onclick="location.href='@Url.Action("Index", "Boletos")'" class="btn btn-danger">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>
